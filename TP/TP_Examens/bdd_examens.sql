@@ -37,6 +37,7 @@ CREATE TABLE Eleve(
 CREATE TABLE Examen(
    id_examen INT,
    nom VARCHAR(50),
+   date_examen DATE,
    PRIMARY KEY(id_examen)
 );
 
@@ -44,6 +45,7 @@ CREATE TABLE Epreuve(
    id_epreuve INT,
    nom VARCHAR(50),
    coefficient INT,
+   date_epreuve DATE,
    PRIMARY KEY(id_epreuve)
 );
 
@@ -105,7 +107,6 @@ CREATE TABLE effectuer(
 );
 
 
-
 -- Insertion d'enseignants
 INSERT INTO Enseignant VALUES (101, 'Professeur Dubois', '1234567890', '123 Rue Principale', 'Paris');
 INSERT INTO Enseignant VALUES (102, 'Professeur Martin', '9876543210', '456 Avenue du Chene', 'Lyon');
@@ -134,17 +135,16 @@ INSERT INTO Eleve VALUES (504, 'Antoine Martin', '555 Chemin du Pin', '2002-11-2
 INSERT INTO Eleve VALUES (601, 'Jeanne SansEpreuve', '456 Chemin du Bouleau', '2000-05-15', 201);
 
 -- Insertion d'examens avec note
-INSERT INTO Examen VALUES (701, 'Baccalauréat');
-INSERT INTO Examen VALUES (702, 'Autre Examen');
-INSERT INTO Examen VALUES (703, 'Licence');
-INSERT INTO Examen VALUES (704, 'Master');
-
+INSERT INTO Examen VALUES (701, 'Baccalauréat', '2023-06-25');
+INSERT INTO Examen VALUES (702, 'Autre Examen', '2023-06-25');
+INSERT INTO Examen VALUES (703, 'Licence', '2023-06-25');
+INSERT INTO Examen VALUES (704, 'Master', '2023-06-25');
 
 -- Insertion d'épreuves
-INSERT INTO Epreuve VALUES (801, 'Mathematiques', 3);
-INSERT INTO Epreuve VALUES (802, 'Francais', 2);
-INSERT INTO Epreuve VALUES (803, 'Histoire-Geographie', 4);
-INSERT INTO Epreuve VALUES (804, 'Sciences', 3);
+INSERT INTO Epreuve VALUES (801, 'Mathematiques', 3, '2023-06-27');
+INSERT INTO Epreuve VALUES (802, 'Francais', 2, '2023-06-28');
+INSERT INTO Epreuve VALUES (803, 'Histoire-Geographie', 4, '2023-06-30');
+INSERT INTO Epreuve VALUES (804, 'Sciences', 3, '2023-06-22');
 
 -- Insertion dans la table inscrire
 INSERT INTO inscrire VALUES (301, 501);
@@ -190,10 +190,5 @@ INSERT INTO effectuer VALUES (502, 802, 18.2);
 INSERT INTO effectuer VALUES (503, 803, 12.8);
 INSERT INTO effectuer VALUES (504, 804, 16.7);
 
-ALTER TABLE Examen
-ADD COLUMN date_examen DATE;
 
-UPDATE Examen
-SET date_examen = '2023-06-25'
-WHERE id_examen = 704;
 
