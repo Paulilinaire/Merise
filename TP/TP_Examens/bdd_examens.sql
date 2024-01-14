@@ -145,6 +145,9 @@ INSERT INTO Epreuve VALUES (801, 'Mathematiques', 3, '2023-06-27');
 INSERT INTO Epreuve VALUES (802, 'Francais', 2, '2023-06-28');
 INSERT INTO Epreuve VALUES (803, 'Histoire-Geographie', 4, '2023-06-30');
 INSERT INTO Epreuve VALUES (804, 'Sciences', 3, '2023-06-22');
+INSERT INTO Epreuve VALUES (805, 'Français', 4, '2023-06-29');
+INSERT INTO Epreuve VALUES (806, 'Anglais', 4, '2023-06-29');
+INSERT INTO Epreuve VALUES (807, 'Philosophie', 6, '2023-06-26');
 
 -- Insertion dans la table inscrire
 INSERT INTO inscrire VALUES (301, 501);
@@ -170,6 +173,8 @@ INSERT INTO passer VALUES (502, 702);
 INSERT INTO passer VALUES (503, 703);
 INSERT INTO passer VALUES (503, 702);
 INSERT INTO passer VALUES (503, 701);
+INSERT INTO passer VALUES (502, 703);
+INSERT INTO passer VALUES (501, 702);
 -- L'élève 601 n'a pas passé d'examen
 
 -- Insertion dans la table travailler
@@ -183,12 +188,18 @@ INSERT INTO contenir VALUES (701, 801);
 INSERT INTO contenir VALUES (702, 802);
 INSERT INTO contenir VALUES (703, 803);
 INSERT INTO contenir VALUES (704, 804);
+INSERT INTO contenir VALUES (701, 805);
+INSERT INTO contenir VALUES (701, 806);
+INSERT INTO contenir VALUES (703, 807);
 
 -- Insertion des relations effectuer
 INSERT INTO effectuer VALUES (501, 801, 14.5);
 INSERT INTO effectuer VALUES (502, 802, 18.2);
 INSERT INTO effectuer VALUES (503, 803, 12.8);
 INSERT INTO effectuer VALUES (504, 804, 16.7);
+INSERT INTO effectuer VALUES (504, 807, 14.7);
+INSERT INTO effectuer VALUES (503, 804, 10.2);
+INSERT INTO effectuer VALUES (502, 807, 19.3);
 
 
 
