@@ -61,9 +61,18 @@ FROM eleve
 LEFT JOIN passer ON eleve.code_eleve = passer.code_eleve
 WHERE passer.code_eleve IS NULL;
 
+
 -- 9 - Identifier les enseignants qui ont à la fois rédigé et corrigé la même épreuve :
+SELECT DISTINCT enseignant.nom
+FROM enseignant
+JOIN rediger ON rediger.matricule_enseignant = enseignant.matricule_enseignant
+JOIN corriger ON corriger.matricule_enseignant = enseignant.matricule_enseignant
+WHERE rediger.id_epreuve = corriger.id_epreuve;
+
+
+ -- 10 - Montrer le dernier examen que chaque élève a passé, avec la date et la note :
 SELECT
-    e.code_eleve,
+    e.code_eleve, e.nom,
     MAX(ep.date_epreuve) AS derniere_epreuve,
     AVG(ef.note) AS moyenne_note
 FROM
@@ -75,6 +84,4 @@ JOIN Epreuve ep ON c.id_epreuve = ep.id_epreuve
 LEFT JOIN effectuer ef ON e.code_eleve = ef.code_eleve AND ep.id_epreuve = ef.id_epreuve
 GROUP BY
     e.code_eleve;
-
-
 

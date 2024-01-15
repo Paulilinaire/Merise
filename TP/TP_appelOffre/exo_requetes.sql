@@ -67,28 +67,7 @@ GROUP BY produit.nom_produit;
 
 
 -- 10 - Trouver les offres qui n'ont pas été signées avant leur date de clôture et les fournisseurs responsables.
-SELECT
-    o.num_offre,
-    o.date_offre,
-    o.date_cloture,
-    f.num_fournisseur,
-    f.nom_fournisseur,
-    ct.date_signature
-FROM
-    offre o
-JOIN
-    offre_fournisseur off ON o.num_offre = off.num_offre
-JOIN
-    fournisseur f ON off.num_fournisseur = f.num_fournisseur
-LEFT JOIN
-    contracter ct ON off.num_fournisseur = ct.num_fournisseur
-WHERE
-    ct.num_contrat IS NULL OR
-    ct.num_contrat NOT IN (
-        SELECT num_contrat
-        FROM contracter
-        WHERE date_signature > o.date_cloture
-    );
+
     
 
 

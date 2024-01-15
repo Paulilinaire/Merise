@@ -40,6 +40,7 @@ CREATE TABLE contrat(
    FOREIGN KEY(num_produit) REFERENCES Produit(num_produit)
 );
 
+
 CREATE TABLE offre_fournisseur(
    num_offre INT,
    num_fournisseur INT,
@@ -57,14 +58,15 @@ CREATE TABLE contracter(
 );
 
 
+
+
 -- INSERT statements for the 'Produit' table
 INSERT INTO Produit VALUES (101, 'Ordinateur Portable', 899.99);
 INSERT INTO Produit VALUES (102, 'Smartphone', 599.99);
 INSERT INTO Produit VALUES (103, 'Imprimante', 129.99);
 INSERT INTO Produit VALUES (104, 'Tablette', 349.99);
 INSERT INTO Produit VALUES (105, 'Écran PC', 299.99);
-INSERT INTO Produit VALUES (106, 'Clavier sans fil', 49.99);
-
+INSERT INTO Produit VALUES (106, 'Iphone', 899.99);
 
 -- INSERT statements for the 'offre' table
 INSERT INTO offre VALUES (201, '2024-01-10', '2024-01-20', 50, 101);
@@ -86,7 +88,7 @@ INSERT INTO contrat VALUES (402, '2024-02-15', 150, 'Signature B', 102);
 INSERT INTO contrat VALUES (403, '2024-03-20', 200, 'Signature C', 103);
 INSERT INTO contrat VALUES (404, '2024-04-10', 120, 'Signature D', 104);
 INSERT INTO contrat VALUES (405, '2024-05-05', 80, 'Signature E', 105);
-INSERT INTO contrat VALUES (501, '2024-06-01', 150, 'Signature F', 101);
+INSERT INTO contrat VALUES (406, '2024-07-25', 80, 'Signature F', 106);
 
 
 -- INSERT statements for the 'offre_fournisseur' table
@@ -102,6 +104,4 @@ INSERT INTO contracter VALUES (302, 402);
 INSERT INTO contracter VALUES (303, 403);
 INSERT INTO contracter VALUES (304, 404);
 INSERT INTO contracter VALUES (305, 405);
-
-
 
