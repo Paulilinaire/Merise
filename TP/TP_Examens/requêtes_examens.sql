@@ -1,3 +1,121 @@
+CREATE DATABASE IF NOT EXISTS examens;
+    
+USE examens;
+
+-- Création des tables
+
+CREATE TABLE Etablissement (
+    code_etablissement INT PRIMARY KEY,
+    nom VARCHAR(100) NOT NULL,
+    adresse VARCHAR(100),
+    ville VARCHAR(50)
+);
+
+CREATE TABLE Eleve (
+    code_eleve INT PRIMARY KEY,
+    nom VARCHAR(50) NOT NULL,
+    prenom VARCHAR(50) NOT NULL,
+    date_naissance DATE,
+    code_etablissement INT,
+    FOREIGN KEY (code_etablissement) REFERENCES Etablissement(code_etablissement)
+);
+
+CREATE TABLE Examen (
+    id_examen INT PRIMARY KEY,
+    nom VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE Epreuve (
+    id_epreuve INT PRIMARY KEY,
+    nom VARCHAR(50) NOT NULL,
+    coefficient INT,
+    date_epreuve DATE
+);
+
+CREATE TABLE Enseignant (
+    matricule_enseignant INT PRIMARY KEY,
+    nom VARCHAR(50) NOT NULL,
+    telephone VARCHAR(20),
+    adresse VARCHAR(100),
+    ville VARCHAR(50),
+    code_etablissement INT,
+    FOREIGN KEY (code_etablissement) REFERENCES Etablissement(code_etablissement)
+);
+
+CREATE TABLE Inscription (
+    numero_inscription INT PRIMARY KEY,
+    code_eleve INT,
+    id_examen INT,
+    date_inscription DATE,
+    FOREIGN KEY (code_eleve) REFERENCES Eleve(code_eleve),
+    FOREIGN KEY (id_examen) REFERENCES Examen(id_examen)
+);
+
+CREATE TABLE Redaction (
+    matricule_enseignant INT,
+    id_epreuve INT,
+    date_redaction DATE,
+    PRIMARY KEY (matricule_enseignant, id_epreuve),
+    FOREIGN KEY (matricule_enseignant) REFERENCES Enseignant(matricule_enseignant),
+    FOREIGN KEY (id_epreuve) REFERENCES Epreuve(id_epreuve)
+);
+
+CREATE TABLE Correction (
+    matricule_enseignant INT,
+    id_epreuve INT,
+    date_correction DATE,
+    PRIMARY KEY (matricule_enseignant, id_epreuve),
+    FOREIGN KEY (matricule_enseignant) REFERENCES Enseignant(matricule_enseignant),
+    FOREIGN KEY (id_epreuve) REFERENCES Epreuve(id_epreuve)
+);
+
+CREATE TABLE Note (
+    code_eleve INT,
+    id_epreuve INT,
+    note FLOAT,
+    PRIMARY KEY (code_eleve, id_epreuve),
+    FOREIGN KEY (code_eleve) REFERENCES Eleve(code_eleve),
+    FOREIGN KEY (id_epreuve) REFERENCES Epreuve(id_epreuve)
+);
+
+-- Insertion de données d'exemple
+
+INSERT INTO Etablissement (code_etablissement, nom, adresse, ville) VALUES
+(1, 'Lycée A', '123 Rue A', 'Paris'),
+(2, 'Lycée B', '456 Rue B', 'Lyon');
+
+INSERT INTO Eleve (code_eleve, nom, prenom, date_naissance, code_etablissement) VALUES
+(1, 'Durand', 'Jean', '2005-05-15', 1),
+(2, 'Martin', 'Sophie', '2006-06-20', 2);
+
+INSERT INTO Examen (id_examen, nom) VALUES
+(1, 'Baccalauréat');
+
+INSERT INTO Epreuve (id_epreuve, nom, coefficient, date_epreuve) VALUES
+(1, 'Mathématiques', 4, '2024-06-01'),
+(2, 'Physique', 3, '2024-06-02');
+
+INSERT INTO Enseignant (matricule_enseignant, nom, telephone, adresse, ville, code_etablissement) VALUES
+(1, 'Lemoine', '0102030405', '789 Rue C', 'Paris', 1),
+(2, 'Dupont', '0607080910', '101 Rue D', 'Lyon', 2);
+
+INSERT INTO Inscription (numero_inscription, code_eleve, id_examen, date_inscription) VALUES
+(1, 1, 1, '2023-12-01'),
+(2, 2, 1, '2023-12-02');
+
+INSERT INTO Redaction (matricule_enseignant, id_epreuve, date_redaction) VALUES
+(1, 1, '2024-04-01'),
+(2, 2, '2024-04-02');
+
+INSERT INTO Correction (matricule_enseignant, id_epreuve, date_correction) VALUES
+(1, 1, '2024-06-02'),
+(2, 2, '2024-06-03');
+
+INSERT INTO Note (code_eleve, id_epreuve, note) VALUES
+(1, 1, 16.5),
+(2, 2, 14.0);
+
+
 -- Affichage des données
 SELECT * FROM Enseignant;
 SELECT * FROM Epreuve;
