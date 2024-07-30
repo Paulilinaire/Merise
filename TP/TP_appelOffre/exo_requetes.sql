@@ -1,3 +1,71 @@
+CREATE DATABASE IF NOT EXISTS appel_offre;
+    
+USE appel_offre;
+
+-- Création des tables 
+CREATE TABLE Produit (
+    num_produit INT PRIMARY KEY,
+    nom_produit VARCHAR(100) NOT NULL,
+    prix_unitaire DECIMAL(10, 2) DEFAULT NULL
+);
+
+CREATE TABLE Offre (
+    num_offre INT PRIMARY KEY,
+    date_offre DATE NOT NULL,
+    date_cloture DATE NOT NULL,
+    quantite_produit INT NOT NULL,
+    num_produit INT,
+    FOREIGN KEY (num_produit) REFERENCES Produit(num_produit)
+);
+
+CREATE TABLE Fournisseur (
+    num_fournisseur INT PRIMARY KEY,
+    nom_fournisseur VARCHAR(100) NOT NULL,
+    adresse VARCHAR(255) NOT NULL,
+    cp VARCHAR(10) NOT NULL,
+    ville VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE Contrat (
+    num_contrat INT PRIMARY KEY,
+    date_contrat DATE NOT NULL,
+    quantite_negociee INT NOT NULL,
+    signature_acceptation BOOLEAN,
+    num_produit INT,
+    FOREIGN KEY (num_produit) REFERENCES Produit(num_produit)
+);
+
+CREATE TABLE Contracter (
+    num_contrat INT,
+    num_fournisseur INT,
+    PRIMARY KEY (num_contrat, num_fournisseur),
+    FOREIGN KEY (num_contrat) REFERENCES Contrat(num_contrat),
+    FOREIGN KEY (num_fournisseur) REFERENCES Fournisseur(num_fournisseur)
+);
+
+-- Insertion
+INSERT INTO Produit (num_produit, nom_produit, prix_unitaire) VALUES
+(1, 'Produit A', 10.50),
+(2, 'Produit B', 15.75);
+
+INSERT INTO Offre (num_offre, date_offre, date_cloture, quantite_produit, num_produit) VALUES
+(1, '2024-01-01', '2024-01-31', 100, 1),
+(2, '2024-02-01', '2024-02-28', 200, 2);
+
+INSERT INTO Fournisseur (num_fournisseur, nom_fournisseur, adresse, cp, ville) VALUES
+(1, 'Fournisseur X', '123 Rue A', '75001', 'Paris'),
+(2, 'Fournisseur Y', '456 Rue B', '69002', 'Lyon');
+
+INSERT INTO Contrat (num_contrat, date_contrat, quantite_negociee, signature_acceptation, num_produit) VALUES
+(1, '2024-03-01', 100, TRUE, 1),
+(2, '2024-04-01', 200, TRUE, 2);
+
+INSERT INTO Contracter (num_contrat, num_fournisseur) VALUES
+(1, 1),
+(2, 2);
+
+
+
 -- Affichage des données
 SELECT * FROM contrat;
 SELECT * FROM Produit;
